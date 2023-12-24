@@ -1,0 +1,44 @@
+general {
+    base_exp_dir = ./outs/
+    recording = [
+        ./,
+        ./models
+    ]
+}
+
+dataset {
+    data_dir = data/
+    np_data_name = carnew1w_norm.npz
+}
+
+train {
+    learning_rate = 0.001
+    maxiter = 40000
+    warm_up_end = 1000
+    eval_num_points = 100000
+
+
+    batch_size = 5000
+
+    save_freq = 5000
+    val_freq = 2500
+    report_freq = 1000
+
+    igr_weight = 0.1
+    mask_weight = 0.0
+}
+
+model {
+    sdf_network {
+        d_out = 1  # 输出维度为1，表示模型输出一个标量值
+        d_in = 3  # 输入维度为3，表示模型接收三维坐标作为输入
+        d_hidden = 256  # 隐藏层的维度为256，控制模型的复杂度和表示能力
+        n_layers = 8  # 网络的层数为8，表示模型由8个隐藏层组成
+        skip_in = [4]  # 跳跃连接的输入层索引为4，表示第4个隐藏层的输出将与输入层相加
+        multires = 0  # 多分辨率设置为0，表示模型不使用多分辨率结构
+        bias = 0.5  # 偏置值为0.5，用于调整模型的输出偏移
+        scale = 1.0  # 缩放因子为1.0，用于调整模型的输出尺度
+        geometric_init = True  # 几何初始化设置为True，表示模型的权重将使用几何初始化方法
+        weight_norm = True  # 权重归一化设置为True，表示模型的权重将进行归一化处理
+    }
+}

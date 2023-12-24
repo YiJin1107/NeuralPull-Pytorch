@@ -4,7 +4,7 @@ import torch.nn.functional as F
 import numpy as np
 import trimesh
 
-
+# 继承
 class NPullNetwork(nn.Module):
     def __init__(self,
                  d_in,
